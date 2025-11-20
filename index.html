@@ -10,6 +10,9 @@
 			margin: 0;
 			color: black;
 		}
+		*, *::before, *::after {
+		  box-sizing: border-box;
+		}
 		#logo {
 			position: fixed;
 			top: 50%;
@@ -38,16 +41,17 @@
 			align-items: center;
 			gap: 25px;
 			z-index: 5;
+			margin: 0;
 		}
 		#links svg {
 			height: auto;
 			fill: currentColor;
 		}
 		#links #email_logo {
-			width: 25px;
+			width: 23px;
 		}
 		#links #ig_logo {
-			width: 22px;
+			width: 20px;
 		}
 		#links a:hover {
 			opacity: .5;
@@ -78,6 +82,9 @@
 		@media screen and (orientation: portrait) {
 			.swiper-slide.landscape img {
 				object-fit: contain;
+			}
+			#logo {
+				color: white;
 			}
 		}
 		.swiper-container {
