@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Racket Studio</title>
+	<meta name="description" content="Creative Studio • Film • Photography • Special Projects">
+	<style>
+		body {
+			margin: 0;
+			color: black;
+		}
+		*, *::before, *::after {
+		  box-sizing: border-box;
+		}
+		#logo {
+			position: fixed;
+			top: 50%;
+			left: 0;
+			width: 100%;
+			transform: translate(0px,-50%);
+			text-align: center;
+			z-index: 5;
+		}
+		#logo svg {
+			max-width: 40vw;
+			max-height: 50svh;
+			width: auto;
+			height: auto;
+			fill: currentColor;
+		}
+		#links {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			padding: 25px;
+			display: flex;
+			justify-content: center;
+			list-style: none;
+			align-items: center;
+			gap: 25px;
+			z-index: 5;
+			margin: 0;
+		}
+		#links svg {
+			height: auto;
+			fill: currentColor;
+		}
+		#links #email_logo {
+			width: 23px;
+		}
+		#links #ig_logo {
+			width: 20px;
+		}
+		#links a:hover {
+			opacity: .5;
+		}
+		#assets {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			pointer-events: none;
+			z-index: 1;
+		}
+		#assets img {
+			position: absolute;
+			height: auto;
+			opacity: 0;
+			transition: opacity 1s ease, transform 2s ease;
+			transform: translate(0px,5px);
+		}
+		#assets img.active, #assets img.prev {
+			opacity: 1;
+			transform: translate(0px,0px);
+		}
+		img.small{
+			width: 15vw;
+		}
+		img.medium {
+			width: 25vw;
+		}
+		img.large {
+			width: 30vw;
+		}
+		.swiper-container {
+			width: 100%;
+		}
+		.swiper-slide {
+			width: 100%;
+			background-color: white;
+		}
+		body.white {
+			color: white;
+		}
+		@media screen and (orientation: portrait) {
+
+			body.white #links {
+				color: black;
+			}
+		}
+		a {
+			color: inherit;
+		}
+	</style>
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+	<div id="assets">
+		<img class="image" src="img/dazed-rachel-hudson.avif" alt="Dazed Cover - Rachel Fleminger Hudson">
+		<img class="image" src="img/danny-brown.avif" alt="Danny Brown Album Artwork">
+		<img class="image" src="img/dazed-scarlet.avif" alt="Dazed - Scarlett Carlos Clarke">
+		<img class="image" src="img/dazed-summer.avif" alt="Dazed Summer - Erika Kamano">
+		<img class="image" src="img/esquire-erika.avif" alt="Esquire - Erika Kamano">
+		<img class="image" src="img/harpers-bazaar.avif" alt="Harpers Bazaar - Oliver Hadlee Pearch">
+		<img class="image" src="img/skepta-fantastic-man.avif" alt="Skepta - Fantastic Man">
+		<img class="image" src="img/skepta-puma.avif" alt="Skepta x Puma">
+		<img class="image" src="img/sophie-jones-dazed.avif" alt="Dazed - Collective Effort - Sophie Jones">
+		<img class="image" src="img/spotify-ariel.avif" alt="Spotify - Ariel Fisher">
+		<img class="image" src="img/ssense-kering.avif" alt="SSENSE - Kering Eyewear">
+		<img class="image" src="img/sza.avif" alt="SZA - Sophie Jones">
+		<img class="image" src="img/versace-greca.avif" alt="Versace Greca Eyewear">
+	</div>
+	<div id="logo">
+		<svg id="racket_logo" viewBox="0 0 1119.25 333.16"><path d="M937.57,6.71v63.99h49.17v255.74h83.14V70.7h49.37V6.71h-181.69ZM795.23,326.44h142.04v-63.99h-58.9v-70.3h51.94v-60.83h-51.94v-60.63h55.49V6.71h-138.64v319.73ZM710.5,6.71l-37.03,124.22V6.71h-83.14v319.73h83.14v-137.05l33.67,137.05h85.91l-52.24-175.37L788.5,6.71h-78.01ZM584.98,115.57c0-29.85-2.5-51.83-7.5-65.97-5.01-14.13-15.47-25.93-31.4-35.4-15.93-9.47-36.14-14.2-60.63-14.2-18.04,0-34,3.06-47.89,9.18-13.89,6.12-24.75,14.52-32.59,25.18-7.83,10.66-12.54,21.76-14.12,33.28-1.58,11.52-2.37,28.8-2.37,51.84v93.41c0,31.33,2.57,54.8,7.7,70.4,5.13,15.6,15.6,27.81,31.4,36.63,15.8,8.82,35.87,13.23,60.23,13.23s43.15-5.21,59.15-15.62c16-10.42,26.33-22.55,31.01-36.39,4.67-13.84,7.01-37.31,7.01-70.41v-12.46h-83.14v40.19c0,17.56-.96,28.71-2.86,33.46-1.91,4.75-5.96,7.12-12.14,7.12s-10.6-2.37-12.44-7.11c-1.85-4.74-2.76-14.88-2.76-30.41V93.02c0-16.19.92-26.73,2.76-31.6,1.84-4.87,6.19-7.31,13.03-7.31,6.05,0,9.97,2.01,11.75,6.01,1.78,4.01,2.67,14.09,2.67,30.25v55.57h83.14v-30.37ZM276.73,212.3c2.17-28.3,7.49-73.07,15.96-134.29,4.23,53.32,8.45,98.08,12.66,134.29h-28.62ZM229.24,6.71l-42.41,319.73h85.96l5-57.47h29.74l4.46,57.47h84.97L349.41,6.71h-120.17ZM102.99,66.16c3.62,3.16,5.43,9.81,5.43,19.95v17.58c0,14.09-1.88,22.41-5.63,24.98s-10.3,3.85-19.65,3.85V61.42c9.61,0,16.22,1.58,19.85,4.74M0,326.44h83.14v-144.16c11.45,0,18.53,2.04,21.23,6.12,2.7,4.08,4.05,14.68,4.05,31.79v106.25h77.22v-84.33c0-25.8-.69-41.57-2.07-47.3-1.38-5.73-4.91-12.01-10.57-18.86-5.66-6.84-16.72-12.31-33.18-16.39,18.17-1.71,30.35-6.84,36.54-15.4,6.19-8.56,9.28-25.28,9.28-50.16,0-27.25-4.38-47.1-13.13-59.54-8.76-12.44-20.08-20.17-33.97-23.2-13.89-3.03-40.45-4.54-79.68-4.54H0v319.73Z"/></svg>
+	</div>
+	<ul id="links">
+		<li><a href="https://www.instagram.com/racket.studio/" target="_blank" aria-label="Racket Studio on Instagram">
+			<svg id="ig_logo" viewBox="0 0 22.82 22.82"><path d="M11.41,15.14c-2.07,0-3.77-1.7-3.77-3.77s1.7-3.77,3.77-3.77,3.77,1.7,3.77,3.77-1.7,3.77-3.77,3.77M11.41,5.48c-3.22,0-5.89,2.62-5.89,5.89s2.62,5.89,5.89,5.89,5.89-2.67,5.89-5.89-2.67-5.89-5.89-5.89"/><path d="M17.53,4c.74,0,1.33.6,1.33,1.33s-.6,1.34-1.33,1.34-1.33-.6-1.33-1.34.6-1.33,1.33-1.33"/><path d="M20.8,16.15c0,1.43-.51,2.58-1.33,3.36-.83.78-1.98,1.2-3.36,1.2H6.72c-1.38,0-2.53-.41-3.36-1.2-.83-.83-1.24-1.98-1.24-3.41V6.67c0-1.38.41-2.53,1.24-3.36.78-.78,1.98-1.2,3.36-1.2h9.48c1.38,0,2.53.41,3.36,1.24.78.83,1.24,1.98,1.24,3.31v9.48ZM20.98,1.89c-1.2-1.24-2.9-1.89-4.83-1.89H6.67C2.67,0,0,2.67,0,6.67v9.43c0,1.98.65,3.68,1.93,4.92,1.24,1.2,2.9,1.8,4.78,1.8h9.39c1.98,0,3.64-.65,4.83-1.8,1.24-1.2,1.89-2.9,1.89-4.88V6.67c0-1.93-.65-3.59-1.84-4.79"/></svg>
+		</a></li>
+		<li><a href="mailto:hello@racket-studio.com" target="" aria-label="Email Racket Studio">
+			<svg id="email_logo" viewBox="0 0 25.2 18.01"><path d="M1.8,16.21V2.63l10.29,7.12c.05.03.11.06.16.08h.07c.09.04.18.07.28.08.13,0,.25-.03.37-.09h.06l10.37-6.4v12.79H1.8ZM12.6,7.94L3.78,1.81h18.8l-9.98,6.13ZM24.3,0H.83C.76,0,.7,0,.64,0l-.15.06s-.09.05-.14.09c-.05.03-.1.08-.14.13l-.05.05s0,.05,0,.08c-.03.06-.05.11-.07.17-.04.07-.07.15-.09.23v16.29c0,.5.4.9.9.9h23.4c.5,0,.9-.4.9-.9V.91c0-.5-.4-.9-.9-.9"/></svg>
+		</a></li>
+	</ul>
+	<script>
+		function shuffle() {
+		  var container = document.getElementById("assets");
+		  var elementsArray = Array.prototype.slice.call(container.getElementsByClassName('image'));
+		    elementsArray.forEach(function(element){
+		    container.removeChild(element);
+		  })
+		  shuffleArray(elementsArray);
+		  elementsArray.forEach(function(element){
+		  container.appendChild(element);
+		})
+		}
+
+		function shuffleArray(array) {
+		    for (var i = array.length - 1; i > 0; i--) {
+		        var j = Math.floor(Math.random() * (i + 1));
+		        var temp = array[i];
+		        array[i] = array[j];
+		        array[j] = temp;
+		    }
+		    return array;
+		}
+		shuffle();
+
+		$(document).ready(function(){
+			//Assign Sizes at Random
+			var $sizes = ['small','medium','large'];
+			function getSize() {
+			   return $sizes[Math.floor(Math.random() * $sizes.length)];
+			}
+			function randomIntFromInterval(min, max) { // min and max included 
+			  return Math.floor(Math.random() * (max - min + 1) + min);
+			}
+			$('#assets .image').each(function(){
+				$(this).addClass(getSize());
+				var $width = $(this).width();
+				var $height = $(this).height();
+				var $browserWidth = $(window).width();
+				var $browserHeight = $(window).height();
+				var $maxLeftOffset = $browserWidth - $width;
+				var $maxTopOffset = $browserHeight - $height;
+				var $leftOffset = randomIntFromInterval(0, $maxLeftOffset);
+				var $topOffset = randomIntFromInterval(0, $maxTopOffset);
+				$(this).css('top',$topOffset);
+				$(this).css('left',$leftOffset);
+			});
+			setTimeout(function(){
+				$('#assets .image:first-child').addClass('active');
+				var $totalAssets = $('#assets .image').length;
+				console.log($totalAssets);
+				setInterval(function(){
+					//Do the Recurring Animation Here
+					var $current = $('#assets .active');
+
+					$current.removeClass('active');
+					$current.addClass('prev');
+
+					console.log($current.index());
+
+					if($current.index() + 1 == $totalAssets) {
+						$('#assets .image:first-child').addClass('active');
+						$current.prev('.prev').prev('.prev').removeClass('prev');
+					} else if( $current.index() + 1 == 1 ) {
+						
+						$current.next('.image').addClass('active');
+						$('.image').eq($totalAssets - 2).removeClass('prev');
+					} else if( $current.index() + 1 == 2 ) {
+						console.log('second slide');
+						$current.next('.image').addClass('active');
+						$('.image').eq($totalAssets - 1).removeClass('prev');
+					} else {
+						$current.next('.image').addClass('active');
+						$current.prev('.prev').prev('.prev').removeClass('prev');
+					}
+					
+					
+				},1000);
+			},1000);
+			
+
+
+
+		});
+
+		
+	</script>
+</body>
+</html>
